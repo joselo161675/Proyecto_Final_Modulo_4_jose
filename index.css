@@ -1,0 +1,152 @@
+/* Definición de variables CSS para colores, espaciados y tamaños */
+:root {
+    --primary-bg-color: gray;
+    --secondary-bg-color: bisque;
+    --body-bg-color: beige;
+    --text-size-large: 24px;
+    --text-size-medium: 16px;
+    --gap-small: 8px;
+    --gap-medium: 16px;
+    --gap-large: 48px;
+    --container-width: 100%;
+    --container-height: 600px;
+}
+
+/* Estilos base y tipográficos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: var(--gap-small) var(--gap-medium);
+}
+
+/* Estilos del contenedor principal */
+#container {
+    background-color: var(--primary-bg-color);
+    font-size: var(--text-size-large);
+    display: inline-block;
+    width: var(--container-width);
+}
+
+/* Diseño de la cuadrícula principal con áreas nombradas */
+#container-main {
+    display: grid;
+    grid-template-columns: auto 25% 25%;
+    grid-template-rows: 50% 50%;
+    height: var(--container-height);
+    width: var(--container-width);
+    margin-bottom: var(--gap-large);
+    grid-template-areas:
+        "imagen texto1 texto1"
+        "imagen texto2 video";
+    gap: var(--gap-medium);
+}
+
+main {
+    margin-top: var(--gap-large);
+}
+
+.container-image, .video {
+    grid-area: imagen;
+    width: var(--container-width);
+    height: var(--container-width);
+}
+
+.primer-parrafo {
+    grid-area: texto1;
+}
+
+.segundo-parrafo {
+    grid-area: texto2;
+}
+
+.video {
+    grid-area: video;
+}
+
+#container-main :nth-child(3), #container-main :nth-child(2) {
+    padding: var(--gap-medium);
+}
+
+/* Flexbox para elementos accionables y finales */
+.container-accionables, .container-final {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-accionables * {
+    padding: var(--gap-small) var(--gap-medium);
+    font-size: var(--text-size-medium);
+}
+
+.container-final > * {
+    width: 50%;
+}
+
+.container-final :nth-child(1) {
+    justify-content: center;
+}
+
+.container-final form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
+    width: 80%;
+}
+
+.container-final form :last-child {
+    gap: var(--gap-small);
+    justify-content: center;
+}
+
+/* Media Queries para responsividad */
+@media screen and (max-width: 600px) {
+    #container {
+        background-color: var(--secondary-bg-color);
+    }
+
+    #container-main {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "imagen imagen"
+            "texto1 texto1"
+            "texto2 texto2"
+            "video video";
+        height: auto;
+        gap: 0;
+    }
+
+    .primer-parrafo, .segundo-parrafo {
+        overflow-y: auto;
+    }
+
+    .container-accionables {
+        flex-direction: column;
+        gap: var(--gap-small);
+        margin-bottom: var(--gap-medium);
+    }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1199px) {
+    #container-main {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(4, auto);
+        grid-template-areas:
+            "imagen imagen"
+            "texto1 texto1"
+            "texto2 texto2"
+            "video video";
+        height: auto;
+        gap: 0;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    body {
+        background-color: var(--body-bg-color);
+    }
+}
